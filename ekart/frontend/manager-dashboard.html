@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard - EKART</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <span class="navbar-brand">Manager Dashboard</span>
+      <button class="btn btn-danger" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link active" href="#" data-section="customers">Customers</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-section="delivery">Delivery Men</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" data-section="orders">Orders</a></li>
+          </ul>
+        </div>
+      </div>
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="mt-4">
+          <div id="customersSection" class="section">
+            <h2>Customers</h2>
+            <div id="customersTable"></div>
+          </div>
+          <div id="deliverySection" class="section d-none">
+            <h2>Delivery Men</h2>
+            <div id="deliveryTable"></div>
+          </div>
+          <div id="ordersSection" class="section d-none">
+            <h2>Orders & Assignment</h2>
+            <div id="ordersTable"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="toast-container"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/manager.js"></script>
+  <script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        document.querySelectorAll('.section').forEach(s => s.classList.add('d-none'));
+        const section = e.target.dataset.section;
+        document.getElementById(`${section}Section`).classList.remove('d-none');
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        e.target.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
